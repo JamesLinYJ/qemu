@@ -1,0 +1,15 @@
+[package]
+name = "pocket-linux-bench"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[dependencies]
+anyhow = "1"
+libc = "0.2"
+serde_json = "1"
+
+[profile.release]
+lto = "thin"
+strip = true

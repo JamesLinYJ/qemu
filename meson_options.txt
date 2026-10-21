@@ -97,6 +97,8 @@ option('debug_remap', type: 'boolean', value: false,
        description: 'syscall buffer debugging support')
 option('tcg_interpreter', type: 'boolean', value: false,
        description: 'TCG with bytecode interpreter (slow)')
+option('pocket_system_library', type: 'boolean', value: false,
+       description: 'Build an additional in-process system emulator library for Pocket Agent')
 option('safe_stack', type: 'boolean', value: false,
        description: 'SafeStack Stack Smash Protection (requires clang/llvm and coroutine backend ucontext)')
 option('asan', type: 'boolean', value: false,

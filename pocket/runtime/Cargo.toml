@@ -1,0 +1,17 @@
+[package]
+name = "pocket-vm"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[dependencies]
+anyhow = "1.0"
+libc = "0.2"
+serde_json = "1.0"
+
+[build-dependencies]
+bindgen = "0.72"
+
+[profile.release]
+lto = "thin"

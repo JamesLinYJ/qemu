@@ -1,0 +1,18 @@
+[Unit]
+Description=Pocket Agent local tool executor
+After=local-fs.target
+
+[Service]
+Type=simple
+Environment=CODEX_HOME=/root/.pocketagent
+WorkingDirectory=/root/Workspaces
+ExecStart=/usr/local/libexec/pocket-executor --virtio /dev/virtio-ports/dev.pocketagent.control
+Restart=always
+RestartSec=1
+KillMode=control-group
+Delegate=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

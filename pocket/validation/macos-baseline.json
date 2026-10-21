@@ -1,0 +1,129 @@
+{
+  "baseline": "official QEMU v11.1.2 at 4fc49f46dc95d4a27de2509e7fceb2931e91faeb",
+  "scope": "Apple M5 Pro/macOS component validation only; no iOS/iPhone result",
+  "interpreter": "upstream TCI",
+  "jit": false,
+  "hvf": false,
+  "cpu": "cortex-a72",
+  "vcpus": 1,
+  "guest_ram_mib": 512,
+  "translation_cache_mib": 256,
+  "kernel": "7.3.0-pocket",
+  "distribution": "Debian 13 ARM64 with systemd",
+  "checks": {
+    "in_process_qmp": true,
+    "qcow2_snapshot_readback": true,
+    "simd_comparison_boundaries": true,
+    "ripgrep_search_processes": 50,
+    "ripgrep_types": true,
+    "shell_regression": true
+  },
+  "full_network_and_package_acceptance": "pending on this source baseline",
+  "resource_usage": {
+    "involuntary_context_switches": 121601,
+    "peak_rss_bytes": 385646592,
+    "system_cpu_seconds": 2.20761,
+    "user_cpu_seconds": 170.740474,
+    "voluntary_context_switches": 88708
+  },
+  "shell_latency": {
+    "results": {
+      "bash_login": {
+        "completion": {
+          "max_ms": 453.004,
+          "p50_ms": 407.908,
+          "p95_ms": 423.420992,
+          "samples": 50
+        },
+        "first_byte": {
+          "max_ms": 442.732,
+          "p50_ms": 393.752,
+          "p95_ms": 420.978992,
+          "samples": 50
+        }
+      },
+      "bash_no_profile": {
+        "completion": {
+          "max_ms": 138.87800000000001,
+          "p50_ms": 117.321008,
+          "p95_ms": 136.82900800000002,
+          "samples": 50
+        },
+        "first_byte": {
+          "max_ms": 124.38099199999999,
+          "p50_ms": 101.506,
+          "p95_ms": 121.155008,
+          "samples": 50
+        }
+      },
+      "bash_pipeline": {
+        "completion": {
+          "max_ms": 751.086,
+          "p50_ms": 682.8190079999999,
+          "p95_ms": 736.7439999999999,
+          "samples": 20
+        },
+        "first_byte": {
+          "max_ms": 720.7950079999999,
+          "p50_ms": 658.504,
+          "p95_ms": 715.77,
+          "samples": 20
+        }
+      },
+      "persistent_pty": {
+        "completion": {
+          "max_ms": 13.174,
+          "p50_ms": 10.134,
+          "p95_ms": 11.85,
+          "samples": 50
+        },
+        "first_byte": {
+          "max_ms": 10.174000000000001,
+          "p50_ms": 7.8580000000000005,
+          "p95_ms": 9.506,
+          "samples": 50
+        },
+        "startup_ms": 85.024
+      },
+      "python_start": {
+        "completion": {
+          "max_ms": 886.235008,
+          "p50_ms": 692.8919999999999,
+          "p95_ms": 886.235008,
+          "samples": 10
+        },
+        "first_byte": {
+          "max_ms": 785.713008,
+          "p50_ms": 596.442,
+          "p95_ms": 785.713008,
+          "samples": 10
+        }
+      },
+      "shell_rg": {
+        "completion": {
+          "max_ms": 695.288,
+          "p50_ms": 631.788,
+          "p95_ms": 673.395008,
+          "samples": 20
+        },
+        "first_byte": {
+          "max_ms": 650.965008,
+          "p50_ms": 599.1429919999999,
+          "p95_ms": 637.547008,
+          "samples": 20
+        }
+      }
+    },
+    "scope": "guest Linux only; excludes Codex and host-to-guest transport"
+  },
+  "caveats": [
+    "One VM run; guest-only timings exclude Codex and host-to-guest transport.",
+    "Independent command processes and a persistent interactive PTY have different semantics.",
+    "Earlier source-baseline performance results are not evidence for this version."
+  ],
+  "host_memory": {
+    "peak_physical_footprint_bytes": 463700856,
+    "physical_footprint_bytes": 463422328,
+    "returned_mach_words": 93
+  }
+}

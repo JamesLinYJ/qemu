@@ -4200,7 +4200,10 @@ foreach target_base_arch, config_base_arch : config_base_arch_mak
     lib = static_library('stubs_' + target_base_arch,
                          sources: src.all_sources() + genh,
                          include_directories: inc,
-                         c_args: target_system_c_args)
+                         c_args: target_system_c_args,
+                         # TCI helper headers expose libffi types even in
+                         # architecture stubs, including the ARM64-only build.
+                         dependencies: get_option('tcg_interpreter') ? [libffi.partial_dependency(compile_args: true, includes: true)] : [])
     target_stubs_arch_libs += {target_base_arch: lib}
   endif
 endforeach
@@ -4408,6 +4411,19 @@ foreach target : target_dirs
                  include_directories: target_inc,
                  c_args: c_args,
                  build_by_default: false)
+
+  # Embedders own the main thread and the QEMU lifecycle. Export the existing
+  # qemu_init/main_loop/cleanup implementation without system/main.c, which
+  # owns a desktop entry point and exits the host process on normal shutdown.
+  # The ordinary upstream executables remain available and unchanged.
+  if target_type == 'system' and get_option('pocket_system_library')
+    shared_library('qemu-' + target, main_rs,
+                   dependencies: arch_deps + [target_stubs],
+                   objects: lib.extract_all_objects(recursive: true),
+                   link_depends: [block_syms, qemu_syms],
+                   link_args: link_args,
+                   install: true)
+  endif
 
   if target.endswith('-softmmu')
     execs = [{
